@@ -2,7 +2,7 @@
 
 ## Style Guides
 
-- [JavaScript]
+- [JavaScript](https://github.com/medley-inc/guidelines/tree/master/javascript)
 
 ## Note
 
