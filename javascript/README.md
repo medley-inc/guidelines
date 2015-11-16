@@ -1,50 +1,6 @@
 # JavaScript コーディングガイドライン
 
-**Table of Contents**  *generated with [DocToc](http://doctoc.herokuapp.com/)*
-
-- [JavaScript コーディングガイドライン](#javascript-コーディングガイドライン)
-    - [はじめに](#はじめに)
-    - [ホワイトスペース](#ホワイトスペース)
-    - [記号](#記号)
-    - [命名規則](#命名規則)
-    - [コメント](#コメント)
-    - [ブロック](#ブロック)
-    - [文字列の連結](#文字列の連結)
-    - [オブジェクト・配列の記法](#オブジェクト・配列の記法)
-    - [コンストラクタ](#コンストラクタ)
-    - [等価演算子](#等価演算子)
-    - [三項演算子について](#三項演算子について)
-    - [変数定義](#変数定義)
-    - [Strict Mode セーフなコードにする](#strict-mode-セーフなコードにする)
-    - [JavaScript特有の注意点](#javascript特有の注意点)
-    - [JSHint](#jshint)
-        - [Webサービス](#webサービス)
-        - [Node.jsのnpmを使用して，JSHintをインストールする](#nodejsのnpmを使用して，jshintをインストールする)
-        - [WebStorm & PHPStorm](#webstorm-phpstorm)
-        - [Eclipse](#eclipse)
-        - [Sublime Text2](#sublime-text2)
-        - [Vim](#vim)
-        - [Emacs](#emacs)
-        - [その他](#その他)
-        - [JSHintの設定について](#jshintの設定について)
-            - [JSHint 2.0での変更点](#jshint-20での変更点)
-    - [JavaScriptフレームワーク・ライブラリ](#javascriptフレームワーク・ライブラリ)
-        - [DOM操作](#dom操作)
-        - [Async/Control Flow](#asynccontrol-flow)
-        - [注意点](#注意点)
-    - [クライアントサイドJavaScript高速化の要点](#クライアントサイドjavascript高速化の要点)
-        - [HTMLのレンダリングをブロッキングしないようにscriptタグは下部に置く](#htmlのレンダリングをブロッキングしないようにscriptタグは下部に置く)
-        - [document.write()をHTMLに書かない](#documentwriteをhtmlに書かない)
-        - [ブラウザの再描画・再フローをなるべくしない](#ブラウザの再描画・再フローをなるべくしない)
-        - [ずっと続くタイマーにsetInterval()を使用しない](#ずっと続くタイマーにsetintervalを使用しない)
-        - [`console.log`をソースに残さない](#consolelogをソースに残さない)
-        - [JavaScriptをなるべく使わない](#javascriptをなるべく使わない)
-    - [jQueryを使用したクライアントサイドJavaScript特有の注意点](#jqueryを使用したクライアントサイドjavascript特有の注意点)
-    - [1ソースアプリ特有の注意点](#1ソースアプリ特有の注意点)
-        - [参照URL](#参照url)
-        - [具体例](#具体例)
-
-## <a name="はじめに">はじめに</a>
+## はじめに
 
 JavaScriptのコーディングをする上でのガイドラインになります．  
 **既にプロジェクトで，コーディング規約がある場合はそちらの方に従ってください．**  
@@ -58,7 +14,7 @@ JavaScriptのコーディングをする上でのガイドラインになりま�
 4. [Felix's Node.js Style Guide](http://nodeguide.com/style.html)
 5. [airbnb/javascript](https://github.com/airbnb/javascript)
 
-## <a name="ホワイトスペース">ホワイトスペース</a>
+## ホワイトスペース
 
 * インデントは **スペース2つ** でインデント．タブは使用しない．
 * 1行は， **120文字以内** にするようにする．横スクロールが出ないように．
@@ -79,7 +35,7 @@ var bar = function() {
 }
 ```
 
-## <a name="記号">記号</a>
+## 記号
 
 * インラインで記述する関数や，オブジェクトではコンマ・セミコロンの前以外では波括弧の前後にスペースを入れる．
 
@@ -110,7 +66,7 @@ var bar = "barbar"; // NG
 var baz = '<a href="http://www.ameba.jp">Ameba</a>';  // HTMLを文字列として使用する場合にダブルクォートをエスケープしないで済む
 ```
 
-## <a name="命名規則">命名規則</a>
+## 命名規則
 
 * 命名には基本的には `functionNamesLikeThis` や `variableNamesLikeThis` のように命名してください．
 * 定数や名前空間は `CONST_NAMES_LIKE_THIS` のように命名してください．
@@ -136,7 +92,7 @@ HOGE = {
 };
 ```
 
-## <a name="コメント">コメント</a>
+## コメント
 
 * コメントはソースコードの先頭以外では， `//` を使用してください．コード中で `/* */` を使用するとバグが混入する可能性があります．
 * ただし，JSDocを書くのはもちろん上記の限りではありません．
@@ -177,7 +133,7 @@ var bar = function() {
 
 * 不要なコメントは残さないでください．特に仕様や動作が変更されているのに，コメントが変更されていないと保守がしにくいです．
 
-## <a name="ブロック">ブロック</a>
+## ブロック
 
 * `if/else/for/while/try` などは常に，複数行で記述してください．短かいブロックでも1行で記述する事は避けてください．
 
@@ -210,7 +166,7 @@ else
 }
 ```
 
-## <a name="文字列の連結">文字列の連結</a>
+## 文字列の連結
 
 長い文字列の連結をする際は `+` を行末に置いてください．セミコロン自動挿入などにより無用なエラーや，圧縮時のトラブルを防ぐためです．
 
@@ -222,7 +178,7 @@ var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
     + 'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // NG
 ```
 
-## <a name="オブジェクト・配列の記法">オブジェクト・配列の記法</a>
+## オブジェクト・配列の記法
 
 * オブジェクトは複数行にして記述してください．配列の場合は基本1列で記述してください．長くなるようなら，キリ良く複数行対応で．
 * オブジェクトのKeyが複数の単語になる・予約語の場合はシングルクォートで囲ってください．
@@ -249,7 +205,7 @@ var b= {
 }
 ```
 
-## <a name="コンストラクタ">コンストラクタ</a>
+## コンストラクタ
 
 * `prototype` に`{}`を入れて継承する場合には， `new` を使用して呼び出す際に，コンストラクタが `Object` になってしまいます．
 * `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です．
@@ -294,7 +250,7 @@ console.log(hoge.constructor) // function Hoge() { console.log('new hoge'); }
 hoge.hogera(); // hoge hogera
 ```
 
-## <a name="等価演算子">等価演算子</a>
+## 等価演算子
 
 * JavaScriptでは，2種類の等価演算子が存在しています．( `==` と `===` )
 * 一部の例外を除いて，比較には厳密等価演算子( `===` )を使用してください．等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます．
@@ -324,7 +280,7 @@ if (c == null) {  // 右辺をnullにして，等価演算子で評価すると�
 }
 ```
 
-## <a name="三項演算子について">三項演算子について</a>
+## 三項演算子について
 
 * 三項演算子を使用する場合は，可読性を良くする為に条件文に丸カッコを付けて `(condition) ? a : b;` のように記述してください．
 * `if` 文を使用した方が可読性は間違いなく高くなるので，三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに
@@ -335,7 +291,7 @@ var foo = (a === 'bar') ? return true : return false;  // 条件部分は丸括�
 var foo = a === 'bar' ? return true : return false;  // 丸括弧が無いとこのように可読性が低くなる．
 ```
 
-## <a name="変数定義">変数定義</a>
+## 変数定義
 
 * 変数の定義は関数スコープの中の先頭に1つだけ定義してください．ただし，コードサイズや速度的に遅くなるなどの理由がある場合は，もう1つだけ設置できます．(最大2つ)
 * `for` 文のカウンターの定義は，こちらのルールに当てはめません．条件文で変数宣言しても良いですし，スコープの先頭で宣言しても構いません．
@@ -372,7 +328,7 @@ var testFunc = function() { // NG
 }
 ```
 
-## <a name="strict-mode-セーフなコードにする">Strict Mode セーフなコードにする</a>
+## Strict Mode セーフなコードにする
 
 * ECMAScript 5.1のStrict Modeを仮に指定したとしても，動くコードを書いてください
 * 具体的には **行末のセミコロンの省略** ， **`arguments.callee` の使用** などです．
@@ -389,7 +345,7 @@ function hoge() {
 }
 ```
 
-## <a name="javascript特有の注意点">JavaScript特有の注意点</a>
+## JavaScript特有の注意点
 
 * 特別な理由が無い限り， `eval()` ， `with()`や`new Function()` の使用は禁止です．普通のWebアプリを作るのに際して，この3つを使わなければならない状況は無いはずです．
 
@@ -620,7 +576,7 @@ var object = new Object(),
 
 なぜ，使用を禁止されるものがあるかなどの詳しい理由は，ここでは字数が足りませんので，説明しません．参考図書として[JavaScript: The Good Parts](http://www.oreilly.co.jp/books/9784873113913/)をお勧めします．また，Webサイトでは[Efficient JavaScript](http://dev.opera.com/articles/view/efficient-javascript/)，[Efficient JavaScript 日本語訳](http://www.hyuki.com/yukiwiki/wiki.cgi?EfficientJavaScript)，[JavaScript Garden](http://bonsaiden.github.com/JavaScript-Garden/ja/)が参考になります．
 
-## <a name="jshint">JSHint</a>
+## JSHint
 
 [JSLint](http://www.jslint.com/)や，[JSHint](http://www.jshint.com/)といったツールを使用する事によって，コードの品質チェックが可能になります．
 ここまで上げた注意点も上記のツールを使用する事により大部分で警告が出るようになるので，大変便利です．
@@ -630,13 +586,13 @@ var object = new Object(),
 
 また，おすすめの設定はこの章の最後の方で紹介します．
 
-### <a name="webサービス">Webサービス</a>
+### Webサービス
 
 [JSHint](http://www.jshint.com/)
 
 ここにチェックしたいコードを貼りつけて，下部のチェックボックスからチェックしたいものにチェックを入れ， **Lint** ボタンを押すだけです．
 
-### <a name="nodejsのnpmを使用して，jshintをインストールする">Node.jsのnpmを使用して，JSHintをインストールする</a>
+### Node.jsのnpmを使用して，JSHintをインストールする
 
 ここからのエディタにはコマンドラインで， `JSHint` が必要になります．
 必要なものは下記になります．
@@ -657,7 +613,7 @@ $ npm install -g jshint
 
 詳しい導入方法は，[こちら](http://blog.craftgear.net/50832ff38cdc8fb415000001/title)を参考に導入してください．
 
-### <a name="webstorm-phpstorm">WebStorm & PHPStorm</a>
+### WebStorm & PHPStorm
 
 標準で，使用できます． `Settings` を開き `JSHint` で検索して `enable` のチェックを入れるだけです．
 
@@ -666,28 +622,28 @@ $ npm install -g jshint
 * [Web Coding Made Smarter](http://www.jetbrains.com/webstorm/features/index.html#JSLintJSHint)
 * [How to lint your JavaScript with JSLint in real time](http://blog.jetbrains.com/webide/2011/12/how-to-lint-your-javascript-with-jslint-in-real-time/)
 
-### <a name="eclipse">Eclipse</a>
+### Eclipse
 
 [jshint-eclipse](http://github.eclipsesource.com/jshint-eclipse/)プラグインを導入してください．
 
-### <a name="sublime-text2">Sublime Text2</a>
+### Sublime Text2
 
 [SublimeLinter](https://github.com/SublimeLinter/SublimeLinter)がおすすめです．
 
 
-### <a name="vim">Vim</a>
+### Vim
 
 [Syntastic](https://github.com/scrooloose/syntastic)がおすすめです．
 
-### <a name="emacs">Emacs</a>
+### Emacs
 
 Flymakeでの使用か[jshint-mode](https://github.com/daleharvey/jshint-mode)がおすすめです．
 
-### <a name="その他">その他</a>
+### その他
 
 公式サイトに他のエディタで使用する場合の[リンク](http://www.jshint.com/platforms/)があります．
 
-### <a name="jshintの設定について">JSHintの設定について</a>
+### JSHintの設定について
 
 `JSHint` ではオプションの設定により，警告の有無を選ぶ事ができます． `npm` でインストールする場合は， `.jshintrc` ファイルをホームディレクトリや
 プロジェクトに作る事により，設定が反映されます．(プロジェクトの場合は `--config /path/to/.jshintrc` オプションを渡す必要あり)
@@ -700,7 +656,7 @@ Flymakeでの使用か[jshint-mode](https://github.com/daleharvey/jshint-mode)�
 
 `.jshintrc` の[サンプル](http://ghe.amb.ca.local/hiraki-satoru/js-coding-guideline/blob/master/misc/.jshintrc)．一応，上記のガイドラインに合わせるようにしました．他はプロジェクト毎に変更していく・ファイル毎にオプションを書いていくなどしてください．
 
-#### <a name="jshint-20での変更点">JSHint 2.0での変更点</a>
+#### JSHint 2.0での変更点
 
 **2013-05-17**
 
@@ -726,19 +682,19 @@ Flymakeでの使用か[jshint-mode](https://github.com/daleharvey/jshint-mode)�
 
 あとは，このバージョンからバージョンアップのスピードアップがされるそうです．
 
-## <a name="javascriptフレームワーク・ライブラリ">JavaScriptフレームワーク・ライブラリ</a>
+## JavaScriptフレームワーク・ライブラリ
 
 使用するフレームワークについては，各プロジェクトでチームビルドにより違うので一概に「これが良い」というものはありません．  
 しかし，使用を推奨するフレームワーク・ライブラリは以下のようなものになるかと思います．
 
-### <a name="dom操作">DOM操作</a>
+### DOM操作
 
 * [jQuery](http://jquery.com/)
     * 2.0で使用するのが良いです．
 * [zepto.js](http://zeptojs.com/)
     * jQueryよりもイニシャルの転送量は少なくて済みます．が，セレクタの使い方を間違えるとDOM操作が遅くなるので注意．
 
-### <a name="asynccontrol-flow">Async/Control Flow</a>
+### Async/Control Flow
 
 * [Q](http://documentup.com/kriskowal/q/)
 * [When.js](https://github.com/cujojs/when)
@@ -746,7 +702,7 @@ Flymakeでの使用か[jshint-mode](https://github.com/daleharvey/jshint-mode)�
 これらはこちらの[リポジトリ](http://ghe.amb.ca.local/am-game-coredev/async-controlFlow-compare)で検証していますが，
 jQuery代替として使用するなら上の2つがオススメです．
 
-### <a name="注意点">注意点</a>
+### 注意点
 
 またテンプレートエンジンとして[Handlebars.js](http://handlebarsjs.com/)や[jsrender](http://borismoore.github.io/jsrender/demos/index.html)などが
 使用されています．(詳しい比較検討はしていません)
@@ -763,23 +719,23 @@ jQuery代替として使用するなら上の2つがオススメです．
 
 など複数の視点で選択してください．もし迷った場合は，相談いただいても問題ありません．
 
-## <a name="クライアントサイドjavascript高速化の要点">クライアントサイドJavaScript高速化の要点</a>
+## クライアントサイドJavaScript高速化の要点
 
 ここまで，色々と書いてきましたが，以上を踏まえてのクライアントの描画の要点をまとめてみます．
 
-### <a name="htmlのレンダリングをブロッキングしないようにscriptタグは下部に置く">HTMLのレンダリングをブロッキングしないようにscriptタグは下部に置く</a>
+### HTMLのレンダリングをブロッキングしないようにscriptタグは下部に置く
 
 `<head>` タグに `<script>` を書くと，どうしてもブラウザのレンダリングを阻害するので(白くなったりとかはこれのせいです)
 `</body>` の直前に書くのが良いです．大体YSlowとかGoogle Speedもこれは見てます． **DOMContentLoaded** のタイミングでJavaScriptの実行がされて，
 なおかつ，HTMLの中に *onclick* などがインラインで書かれてたりしなければ，ほぼ不具合は無いはずです．jQueryは `$(function {});` でイベントハンドリング
 すれば勝手に **DOMContentLoaded** のタイミングで実行してくれます．
 
-### <a name="documentwriteをhtmlに書かない">document.write()をHTMLに書かない</a>
+### document.write()をHTMLに書かない
 
 今どき `document.write()` はねーよww とか思いますが，案外入れらる事があったりも．気を付けようねレベルですが，これが入るとその部分でレンダリングが
 絶対止まります．そこで他に `<script>` タグとか呼んでたら，事によるとその実行まで入ったりします．ダメ絶対．
 
-### <a name="ブラウザの再描画・再フローをなるべくしない">ブラウザの再描画・再フローをなるべくしない</a>
+### ブラウザの再描画・再フローをなるべくしない
 
 再描画はDOM要素の色や見た目，再フローは位置・サイズ変更・追加などでブラウザがレンダリングしなおすことです．
 ブラウザの動作の中で非常にコストが高い上，回線速度によっては真っ白になったりするなどユーザーの体感速度にもかなり影響してきます．
@@ -828,7 +784,7 @@ $('ul').append(list);
 
 > DOMツリーには挿入されるけど，描画の範囲外というのが `documentFragment` なのでここに `appendChild()` するという手です．[http://ejohn.org/apps/workshop/adv-talk/#6](http://ejohn.org/apps/workshop/adv-talk/#6)←これが分かりやすいかも 
 
-### <a name="ずっと続くタイマーにsetintervalを使用しない">ずっと続くタイマーにsetInterval()を使用しない</a>
+### ずっと続くタイマーにsetInterval()を使用しない
 
 代わりに， `setTimeout()` を再帰で呼び出した方が良いです．理由としてはブラウザはシングルスレッドなので一度に1つの事しか実行できません．が， `setInterval()` は
 呼び出されると延々と将来のスレッドにも呼び出された処理を(止めるまで)挟み込み続けるからです．
@@ -838,14 +794,14 @@ $('ul').append(list);
 `setTimeout()` を再帰で呼び出すと将来に渡って延々では無く次の処理を予約くらいで済む為に，アニメーションの処理なんかがスレッドにちゃんと入りますので，
 そこまではガクつかないです．(処理にもよりますけど)
 
-### <a name="consolelogをソースに残さない">`console.log`をソースに残さない</a>
+### `console.log`をソースに残さない
 
 今までのコードサンプルでこれでもかと使っている`console.log`ですが，本番環境では特に消しておくようにしてください．
 ログに吐くオブジェクトの内容によってはメモリーリークの原因になりかねないです．色々手段はあると思うので，頑張って消していきましょう．
 
 参考：http://www.ibm.com/developerworks/jp/web/library/wa-jsmemory/#N101BF
 
-### <a name="javascriptをなるべく使わない">JavaScriptをなるべく使わない</a>
+### JavaScriptをなるべく使わない
 
 どっちらけな感じですが，これが一番速いです．これだけだと身も蓋も無いのですが，要はHTML・CSSで出来る事はJavaScriptでやらないという事を意識すると良いかと．
 
@@ -863,7 +819,7 @@ $('#hoge').css('color', 'red'); // こっちより
 $('#hoge').addClass('red'); // こっちが良い
 ```
 
-## <a name="jqueryを使用したクライアントサイドjavascript特有の注意点">jQueryを使用したクライアントサイドJavaScript特有の注意点</a>
+## jQueryを使用したクライアントサイドJavaScript特有の注意点
 
 * ライブラリを使用する場合は出来る限り最新のものを使用する．バージョンが上がるとフレームワーク自体のパフォーマンスが向上している事が多いです．
 
@@ -904,13 +860,13 @@ $('#hoge').addClass('red'); // こっちが良い
 <div id="jsiListWrapper" class="jscListDivider"></div> // OK
 ```
 
-## <a name="1ソースアプリ特有の注意点">1ソースアプリ特有の注意点</a>
+## 1ソースアプリ特有の注意点
 
 `Backbone.js`などを使用してのアプリケーション開発では気をつけないと容易にメモリリークを起こしてしまいます．
 
 特に画面が遷移した後に，以前のイベントを取り除かないなど
 
-### <a name="参照url">参照URL</a>
+### 参照URL
 
 メモリリークについては[こちら](http://www.ibm.com/developerworks/jp/web/library/wa-jsmemory/?cmp=dw&cpb=dwwdv&ct=dwrss&cr=dwrss&ccy=jp&csr=120712)が分かりやすい解説です．
 Backbone.jsに焦点を合わせたメモリーリーク対策は下記の記事が参考になると思います．
@@ -923,7 +879,7 @@ Backbone.jsに焦点を合わせたメモリーリーク対策は下記の記事
 Gmailでのメモリリークの対処を書いた[こちら](http://www.html5rocks.com/en/tutorials/memory/effectivemanagement/)の記事は，Devツールを使っての原因特定の  
 仕方などもあり大変に参考になります．
 
-### <a name="具体例">具体例</a>
+### 具体例
 
 - イベントハンドラを削除
 - 参照がないDOMの削除
