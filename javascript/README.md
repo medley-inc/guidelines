@@ -16,14 +16,14 @@ JavaScriptのコーディングをする上でのガイドラインになりま�
 
 ## ホワイトスペース
 
-* インデントは **スペース2つ** でインデント．タブは使用しない．
-* 1行は， **120文字以内** にするようにする．横スクロールが出ないように．
+* **[MUST]** インデントは **スペース2つ** でインデント．タブは使用しない．
+* **[SHOULD]** 1行は， **120文字以内** にするようにする．横スクロールが出ないように．
     * 折り返す際は関連する行のインデントに合わせる．
-* 行末に **絶対に** スペースは入れないようにする．
-* キーワードの後ろにはスペースを入れる． 例： `if (a === b)`
-* 二項演算子はスペースで区切る． 例： `a + b`
-* コンマ・セミコロンの後ろにスペースを入れる．
-* ブロックの間は1行以上空ける．
+* **[AVOID]** 行末に **絶対に** スペースは入れないようにする．
+* **[MUST]** キーワードの後ろにはスペースを入れる． 例： `if (a === b)`
+* **[MUST]** 二項演算子はスペースで区切る． 例： `a + b`
+* **[MUST]** コンマ・セミコロンの**後ろ**にスペースを入れる．
+* **[SHOULD]** ブロックとブロックの間は1行以上空ける．
 
 ```javascript
 var foo = function() {
@@ -37,15 +37,15 @@ var bar = function() {
 
 ## 記号
 
-* インラインで記述する関数や，オブジェクトではコンマ・セミコロンの前以外では波括弧の前後にスペースを入れる．
+* **[SHOULD]** インラインで記述する関数や，オブジェクトではコンマ・セミコロンの前以外では波括弧の前後にスペースを入れる．
 
 ```javascript
 var hoge = function(value) { return { fuga: value }; }
 ```
 
-* パラメータリストや配列の添え字などの角括弧や丸括弧の中のスペースは必須ではありません．
+* **[DON'T]**パラメータリストや配列の添え字などの角括弧や丸括弧の中のスペースは必須ではありません．
 
-> ブロックでは，波括弧は省略せずに記述してください．JavaScriptはインタプリタが解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起こり得ます．
+- **[MUST]** ブロックは，波括弧は省略せずに記述してください．JavaScriptはインタプリタの種類によっては、解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起こり得ます.
 
 ```javascript
 if (a === b) {
@@ -56,7 +56,7 @@ if (a === b)
   return a + b;  // NG
 ```
 
-* JavaScriptではシングルクォートとダブルクォートで機能は違いませんが，JSON形式で記述する目的以外ではシングルクォートで記述してください．
+* **[MUST]** JavaScriptではシングルクォートとダブルクォートで機能は違いませんが，JSON形式で記述する目的以外ではシングルクォートで記述してください．
 
 ```javascript
 var foo = 'foofoo';  // OK
@@ -68,13 +68,13 @@ var baz = '<a href="http://www.ameba.jp">Ameba</a>';  // HTMLを文字列とし�
 
 ## 命名規則
 
-* 命名には基本的には `functionNamesLikeThis` や `variableNamesLikeThis` のように命名してください．
-* 定数や名前空間は `CONST_NAMES_LIKE_THIS` のように命名してください．
-* コンストラクタ呼び出しをする関数は `ClassNamesLikeThis` のように命名してください．
-* jQueryオブジェクトを入れる変数は， `$foo = $('#bar');` のようにプレフィックスとして `$` を付けてください．
-* 関数などは動詞 + 名詞で命名してください．
-* 関数以外の変数などは名詞・形容詞 + 名詞で命名してください．
-* 命名は他の人が読んでも分かるように，具体的にしてください．
+* **[MUST]** 命名には基本的には `functionNamesLikeThis` や `variableNamesLikeThis` のように命名してください．
+* **[MUST]** 定数や名前空間は `CONST_NAMES_LIKE_THIS` のように命名してください．
+* **[MUST]** コンストラクタ呼び出しをする関数は `ClassNamesLikeThis` のように命名してください．
+* **[MUST]** jQueryオブジェクトを入れる変数は， `$foo = $('#bar');` のようにプレフィックスとして `$` を付けてください．
+* **[SHOULD]** 関数などは動詞 + 名詞で命名してください．
+* **[SHOULD]** 関数以外の変数などは名詞・形容詞 + 名詞で命名してください．
+* **[MUST]** 命名は他の人が読んでも分かるように，具体的にしてください．
     * 名前が多少長くても問題ないです．一般性が無いものを略称にするのは可読性が悪くなります．やめましょう．
 
 ```javascript
@@ -94,7 +94,7 @@ HOGE = {
 
 ## コメント
 
-* コメントはソースコードの先頭以外では， `//` を使用してください．コード中で `/* */` を使用するとバグが混入する可能性があります．
+* **[MUST]** コメントはソースコードの先頭以外では， `//` を使用してください．コード中で `/* */` を使用するとバグが混入する可能性があります．
 * ただし，JSDocを書くのはもちろん上記の限りではありません．
 * [JSDoc](http://usejsdoc.org/)の使用については，ここでは触れません．
 
@@ -131,11 +131,11 @@ var bar = function() {
 
 ```
 
-* 不要なコメントは残さないでください．特に仕様や動作が変更されているのに，コメントが変更されていないと保守がしにくいです．
+* **[SHOULD]** 不要なコメントは残さないでください．特に仕様や動作が変更されているのに，コメントが変更されていないと保守がしにくいです．
 
 ## ブロック
 
-* `if/else/for/while/try` などは常に，複数行で記述してください．短かいブロックでも1行で記述する事は避けてください．
+* **[SHOULD]** `if/else/for/while/try` などは常に，複数行で記述してください．短かいブロックでも1行で記述する事は避けてください．
 
 ```javascript
 if (a === b) {  // OK
@@ -145,7 +145,7 @@ if (a === b) {  // OK
 if (a === b) { return; }  // NG．可読性確保の為です．どうせcompressされるし．
 ```
 
-* `if/else` や `try/catch` は同じ行に波括弧を書いてください．
+* **[MUST]** `if/else` や `try/catch` は同じ行に波括弧を書いてください．
 
 > JavaScriptはインタプリタが解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起きえます．
 
@@ -168,7 +168,7 @@ else
 
 ## 文字列の連結
 
-長い文字列の連結をする際は `+` を行末に置いてください．セミコロン自動挿入などにより無用なエラーや，圧縮時のトラブルを防ぐためです．
+**[MUST]** 長い文字列の連結をする際は `+` を行末に置いてください．セミコロン自動挿入などにより無用なエラーや，圧縮時のトラブルを防ぐためです．
 
 ```javascript
 var a = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge' +
@@ -180,37 +180,37 @@ var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
 
 ## オブジェクト・配列の記法
 
-* オブジェクトは複数行にして記述してください．配列の場合は基本1列で記述してください．長くなるようなら，キリ良く複数行対応で．
-* オブジェクトのKeyが複数の単語になる・予約語の場合はシングルクォートで囲ってください．
+* **[SHOULD]** オブジェクトは複数行にして記述してください．配列の場合は基本1列で記述してください．長くなるようなら，キリ良く複数行対応で．
+* **[MUST]** オブジェクトのKeyが複数の単語になる・予約語の場合はシングルクォートで囲ってください．
 
 ```javascript
 var a = ['foo', 'bar'];  // OK
-var b = [
-    'foo', 'bar', 'baz',
-    'foo2', 'bar2', 'baz2',
-    'foo3', 'bar3', 'baz3',
-    'foo4', 'bar4', 'baz4'
+var b = [ // OK
+  'foo', 'bar', 'baz',
+  'foo2', 'bar2', 'baz2',
+  'foo3', 'bar3', 'baz3',
+  'foo4', 'bar4', 'baz4'
 ];
-var c = {
-    hoge: 'good',
-    'is huga': 'bad'
+var c = { // OK
+  hoge: 'foo',
+  'is huga': 'bar' 
 }
 
 var a = [ // NG
-    'foo', 'bar'
+  'foo', 'bar'
 ];
-var b= {
-    "hoge": 'good',
-    is huga: 'bad'
+var b= { //NG
+  "hoge": 'foo',
+  is huga: 'bar'
 }
 ```
 
 ## コンストラクタ
 
-* `prototype` に`{}`を入れて継承する場合には， `new` を使用して呼び出す際に，コンストラクタが `Object` になってしまいます．
-* `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です．
-* `Object`が`prototype`になってしまう一番の弊害は，先にインスタンスを呼び出しておいて後から`prototype`を設定された場合にエラーが起きることです．
-* 意図して，上記のような実装をすることはないと思いますが，予期せぬバグになりえます．
+* **[AVOID]** `prototype` に`{}`を入れて継承する場合には， `new` を使用して呼び出す際に，コンストラクタが `Object` になってしまいます．
+	* `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です．
+	* `Object`が`prototype`になってしまう一番の弊害は，先にインスタンスを呼び出しておいて後から`prototype`を設定された場合にエラーが起きることです．
+	* 意図して，上記のような実装をすることはないと思いますが，予期せぬバグになりえます．
 
 ```javascript
 function Hoge() {
@@ -235,7 +235,7 @@ hoge.hogera();
 //Uncaught TypeError: Object [object Object] has no method 'hogera'
 ```
 
-* 上記を防ぐ為に，以下の方法で実装してください．
+* **[MUST]** 上記を防ぐ為に，以下の方法で実装してください．
 
 ```javascript
 Hoge.prototype.fuga = function fuga() {
@@ -252,14 +252,13 @@ hoge.hogera(); // hoge hogera
 
 ## 等価演算子
 
-* JavaScriptでは，2種類の等価演算子が存在しています．( `==` と `===` )
-* 一部の例外を除いて，比較には厳密等価演算子( `===` )を使用してください．等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます．
-* 型変換が起きると，実行速度的にも遅くなります．ほぼ迷わず，厳密等価演算子で問題無いです．
+* **[MUST]** JavaScriptでは，2種類の等価演算子が存在しています．( `==` と `===` )
+	* 一部の例外を除いて，比較には厳密等価演算子( `===` )を使用してください．等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます．
+	* 型変換が起きると，実行速度的にも遅くなります．ほぼ迷わず，厳密等価演算子で問題無いです．
 
 > 注意する点としては，既存のソースを等価演算子だからと言って，厳密等価演算子にしてしまうと動いていたコードが動かなくなる場合があります．
 
-* 上記の一部の例外とは `null` と `undefined` を判定する場合です．この時に `null` と `undefined` の両方の値を評価したい場合に，
-等価演算子( `==` )を使用すると，本来は `null` と `undefined` は別のオブジェクトですが両方とも評価します．
+* **[SHOULD]** 上記の一部の例外とは `null` と `undefined` を判定する場合です．この時に `null` と `undefined` の両方の値を評価したい場合に，等価演算子( `==` )を使用すると，本来は `null` と `undefined` は別のオブジェクトですが両方とも評価します．
 
 > 詳しくは[Qiita](http://qiita.com/items/7d6763ba2594b8f36163)に書きました．
 
@@ -282,23 +281,22 @@ if (c == null) {  // 右辺をnullにして，等価演算子で評価すると�
 
 ## 三項演算子について
 
-* 三項演算子を使用する場合は，可読性を良くする為に条件文に丸カッコを付けて `(condition) ? a : b;` のように記述してください．
-* `if` 文を使用した方が可読性は間違いなく高くなるので，三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに
-使用してください．乱用は可読性が悪くなるので，禁物です．
+* **[MUST]** 三項演算子を使用する場合は，可読性を良くする為に条件文に丸カッコを付けて `(condition) ? a : b;` のように記述してください．
+	* `if` 文を使用した方が可読性は間違いなく高くなるので，三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに使用してください．乱用は可読性が悪くなるので，禁物です．
 
 ```javascript
-var foo = (a === 'bar') ? return true : return false;  // 条件部分は丸括弧で括る．
-var foo = a === 'bar' ? return true : return false;  // 丸括弧が無いとこのように可読性が低くなる．
+var foo = (a === 'bar') ? return true : return false;  // OK:  条件部分は丸括弧で括る．
+var foo = a === 'bar' ? return true : return false;  // NG: 丸括弧が無いとこのように可読性が低くなる．
 ```
 
 ## 変数定義
 
-* 変数の定義は関数スコープの中の先頭に1つだけ定義してください．ただし，コードサイズや速度的に遅くなるなどの理由がある場合は，もう1つだけ設置できます．(最大2つ)
-* `for` 文のカウンターの定義は，こちらのルールに当てはめません．条件文で変数宣言しても良いですし，スコープの先頭で宣言しても構いません．
-* `var` の下には必ず1行の空行を入れてください．
-* 宣言時に未定義の変数は最後にまとめてください．
-* 変数定義の場所がバラバラだと，デバッグが困難になったり，潜在的なバグの原因になります．
-* 変数は必ず定義してから，呼び出してください．意図しない[**巻き上げ**](http://bonsaiden.github.com/JavaScript-Garden/ja/#function.scopes)でバグになる可能性があります．
+* **[SHOULD]** 変数の定義は関数スコープの中の先頭に1つだけ定義してください．ただし，コードサイズや速度的に遅くなるなどの理由がある場合は，もう1つだけ設置できます．(最大2つ)
+* **[SHOULD]** `for` 文のカウンターの定義は，こちらのルールに当てはめません．条件文で変数宣言しても良いですし，スコープの先頭で宣言しても構いません．
+* **[SHOULD]** `var` の下には必ず1行の空行を入れてください．
+* **[SHOULD]** 宣言時に未定義の変数は最後にまとめてください．
+* **[SHOULD]** 変数定義の場所がバラバラだと，デバッグが困難になったり，潜在的なバグの原因になります．
+* **[AVOID]** 変数は必ず定義してから，呼び出してください．意図しない[**巻き上げ**](http://bonsaiden.github.com/JavaScript-Garden/ja/#function.scopes)でバグになる可能性があります．
 
 ```javascript
 var testFunc = function() { // OK
@@ -330,10 +328,10 @@ var testFunc = function() { // NG
 
 ## Strict Mode セーフなコードにする
 
-* ECMAScript 5.1のStrict Modeを仮に指定したとしても，動くコードを書いてください
-* 具体的には **行末のセミコロンの省略** ， **`arguments.callee` の使用** などです．
-* また下記にあるように `eval()` ， `with()`や`new Function()` の使用も禁止です．
-* `arugments.callee` ， `eval()` ， `with()`や`new Function()` は特にパフォーマンス面で深刻な問題があります．
+* **[MUST]** ECMAScript 5.1のStrict Modeを仮に指定したとしても，動くコードを書いてください
+	* 具体的には **行末のセミコロンの省略** ， **`arguments.callee` の使用** などです．
+* **[DON'T]** 下記にあるように `eval()` ， `with()`や`new Function()` の使用も禁止です．
+* **[DON'T]** `arugments.callee` ， `eval()` ， `with()`や`new Function()` は特にパフォーマンス面で深刻な問題があります．
 * 他にもあるのですが，[JSHint](http://www.jshint.com/)のオプションで `Assume > EcmaScript 5` にチェックを入れても，問題無いようにしてください．
     * JSHintのバージョンが2以降の場合はデフォルトで`EcmaScript 5`のオプションが`true`になっています．
 
@@ -347,7 +345,7 @@ function hoge() {
 
 ## JavaScript特有の注意点
 
-* 特別な理由が無い限り， `eval()` ， `with()`や`new Function()` の使用は禁止です．普通のWebアプリを作るのに際して，この3つを使わなければならない状況は無いはずです．
+* **[DON'T]** 特別な理由が無い限り， `eval()` ， `with()`や`new Function()` の使用は禁止です．普通のWebアプリを作るのに際して，この3つを使わなければならない状況は無いはずです．
 
 ```javascript
 var hoge = function(string) {
@@ -362,7 +360,7 @@ var hoge = function(string) {
 }
 ```
 
-* JSONファイルのパースは上述のように `eval()` ではなく， `JSON.parse()` を使用してください．jQueryは `jQuery.ajax()` など使用すれば問題ありません．
+* **[DON'T]** JSONファイルのパースは上述のように `eval()` ではなく， `JSON.parse()` を使用してください．jQueryは `jQuery.ajax()` など使用すれば問題ありません．
 
 > 特に[最近のブラウザ](http://caniuse.com/#search=JSON)では， `JSON` がほぼ搭載されてます．どうしてもIE対応などで必要な場合は*json2.js*などを使用するのをオススメ
 
@@ -376,7 +374,7 @@ var parseJson = function(json) {
 }
 ```
 
-* `setInterval()` や `setTimeout()` ，の引数に文字列を渡さないようにしてください．引数には必ず関数か，匿名関数を渡すようにしてください．
+* **[DON'T]** `setInterval()` や `setTimeout()` ，の引数に文字列を渡さないようにしてください．引数には必ず関数か，匿名関数を渡すようにしてください．
 
 > 文字列で引数を渡すと，内部で `eval()` を使用して評価されるので大変に遅くなります．
 
@@ -392,7 +390,7 @@ setTimeout(function() {  //setTimeout()には必ず関数を引数で渡すよ�
 setTimeout('var target += 3; returnResult(); if (target.length > 0) { return result;}', 500);  // 文字列で関数を渡すのはNG
 ```
 
-* `try-catch-finally` を速度が必要な部分で使用しないでください．特に `catch` 節で複雑な処理をしないでください．
+* **[AVOID]** `try-catch-finally` を速度が必要な部分で使用しないでください．特に `catch` 節で複雑な処理をしないでください．
 
 > これも `catch` 部分のコードが内部で `eval()` を呼んでしまうからです．
 
@@ -416,7 +414,7 @@ for (var i = 0, len = targetArray.length; i < len; i++) {
 }
 ```
 
-* グローバル変数を特別な理由が無い限り，使用しないでください．Google Analyticsなどで使用する場合はコメントを残してください．
+* **[AVOID]** グローバル変数を特別な理由が無い限り，使用しないでください．Google Analyticsなどで使用する場合はコメントを残してください．
 
 ```javascript
 var foo = function() {
@@ -435,7 +433,8 @@ var foo = function() {
 }
 foo();
 ```
-* 各画面で引き回す値などがある場合は必ず *名前空間* を区切って，その中に値を格納するように心がけてください．
+
+* **[MUST]** 各画面で引き回す値などがある場合は必ず *名前空間* を区切って，その中に値を格納するように心がけてください．
 
 ```javascript
 // 名前空間(この場合はnamespace)オブジェクトの下にさらにオブジェクトを作る
@@ -449,9 +448,9 @@ var hoge = {  // ng
 };
 ```
 
-* 暗黙の型変換をしないようにしてください．具体的には等価演算子を使用するようにしてください．
-* 暗黙の型変換するとパフォーマンス的にも遅いです．
-    * 速度の違いはこちらの[JSPerf](http://jsperf.com/super-duper-equality-checks)を参考にしてください
+* **[DON'T]** 暗黙の型変換をしないようにしてください．具体的には等価演算子を使用するようにしてください．
+	* 暗黙の型変換するとパフォーマンス的にも遅いです．
+		  * 速度の違いはこちらの[JSPerf](http://jsperf.com/super-duper-equality-checks)を参考にしてください
 
 ```javascript
 var a = 0;  // 変数aはNumber
@@ -465,32 +464,10 @@ if (b == '') { // ここで暗黙の型変換が起こり，trueで評価され�
 }
 ```
 
-* [こちら](http://jsperf.com/cast-int/3)で確認できますが，以前は`parseInt()`が遅かったのですが，
-現在のWebKitの実装では，むしろ`>> 0`の方が遅いです．
-* <del>整数が必要なので型変換するという場合は速度的には `parseInt()` は一番遅いです．</del>
-* 複雑な計算以外では以下のようにすると速度は出ます．(適材適所です)
-
-```javascript
-var hoge = '05';
-
-parseInt(hoge, 10); // WebKit系はこれが一番速い
-parseInt(hoge); // WebKit系は次点で速いですが，実装によっては8進数に変換される可能性あり．
-hoge >> 0; // Firefoxではこれが一番速い
-Math.floor(hoge); // ここからは他の数値変換の方法
-Number(hoge);
-hoge * 1;
-~~hoge;
-hoge | 0;
-hoge + 0; // NG．元がStringなので結果は"050"になってしまいます…
-```
-
-* `for-in` 文をむやみに使用しないでください．大概が `for` 文で事足ります．オブジェクトの走査などで使用する場合は必ず `Object.hasOwnProperty()` を併用してください．
-
-> `for-in` 文をオブジェクトの走査に使用すると，大元のObjectまで走査しにいきます．なので， `Object.hasOwnProperty` 無しだと無駄なコストがかかってしまいます．
-
-> `for-in` + `Object.hasOwnProperty` の代わりに， `Object.keys(obj)` を使用する事もできます．使えるならこちらの方がパフォーマンスは良いはず．(関数呼び出しのコストが無くなる)
-
-* `for-in` 文を配列に対して使う事は特に厳禁です．パフォーマンスがむちゃくちゃ落ちます．
+* **[AVOID]** `for-in` 文をむやみに使用しないでください．大概が `for` 文で事足ります．オブジェクトの走査などで使用する場合は必ず `Object.hasOwnProperty()` を併用してください．
+	- `for-in` 文をオブジェクトの走査に使用すると，大元のObjectまで走査しにいきます．なので， `Object.hasOwnProperty` 無しだと無駄なコストがかかってしまいます．
+	- `for-in` + `Object.hasOwnProperty` の代わりに， `Object.keys(obj)` を使用する事もできます．使えるならこちらの方がパフォーマンスは良いはず．(関数呼び出しのコストが無くなる)
+* **[DON'T]** `for-in` 文を配列に対して使う事は特に厳禁です．パフォーマンスがむちゃくちゃ落ちます．
 
 ```javascript
 var array = ['foo', 'bar', 'baz'],
@@ -540,7 +517,7 @@ for (var i = 0, len = keys.length; i < len; i++) {
 }
 ```
 
-* `for` 文の条件内で， `length` を使用する場合は1回変数に格納してください．変数にキャッシュする事により，ループの速度が速くなります．
+* **[SHULD]** `for` 文の条件内で， `length` を使用する場合は1回変数に格納してください．変数にキャッシュする事により，ループの速度が速くなります．
 
 ```javascript
 var array = ['foo', 'bar', 'baz'],
@@ -558,7 +535,7 @@ for(var i = 0; i < array.length; i++) {  // array.lengthを変数に入れない
 }
 ```
 
-* オブジェクト・配列・正規表現・関数・文字列・数値などは，特別に理由が無い限り，リテラルで生成してください．コンストラクタ呼び出しは速度が遅くなります．
+* **[SHOULD]** オブジェクト・配列・正規表現・関数・文字列・数値などは，特別に理由が無い限り，リテラルで生成してください．コンストラクタ呼び出しは速度が遅くなります．
 
 ```javascript
 var object = {},
@@ -574,154 +551,12 @@ var object = new Object(),
     string = new String();  // コンストラクタ呼び出しは，基本しない
 ```
 
-なぜ，使用を禁止されるものがあるかなどの詳しい理由は，ここでは字数が足りませんので，説明しません．参考図書として[JavaScript: The Good Parts](http://www.oreilly.co.jp/books/9784873113913/)をお勧めします．また，Webサイトでは[Efficient JavaScript](http://dev.opera.com/articles/view/efficient-javascript/)，[Efficient JavaScript 日本語訳](http://www.hyuki.com/yukiwiki/wiki.cgi?EfficientJavaScript)，[JavaScript Garden](http://bonsaiden.github.com/JavaScript-Garden/ja/)が参考になります．
+> なぜ，使用を禁止されるものがあるかなどの詳しい理由は，ここでは字数が足りませんので，説明しません．参考図書として[JavaScript: The Good Parts](http://www.oreilly.co.jp/books/9784873113913/)をお勧めします．また，Webサイトでは[Efficient JavaScript](http://dev.opera.com/articles/view/efficient-javascript/)，[Efficient JavaScript 日本語訳](http://www.hyuki.com/yukiwiki/wiki.cgi?EfficientJavaScript)，[JavaScript Garden](http://bonsaiden.github.com/JavaScript-Garden/ja/)が参考になります．
 
-## JSHint
-
-[JSLint](http://www.jslint.com/)や，[JSHint](http://www.jshint.com/)といったツールを使用する事によって，コードの品質チェックが可能になります．
-ここまで上げた注意点も上記のツールを使用する事により大部分で警告が出るようになるので，大変便利です．
-
-`JSLint` は厳しい判定が出る場合が多い為に `JSHint` を使用していく事を推奨します．
-導入例は下記にいくつかの例を載せておきますが，一番効果的なのは使用してるエディタやIDEでの自動チェックになります．
-
-また，おすすめの設定はこの章の最後の方で紹介します．
-
-### Webサービス
-
-[JSHint](http://www.jshint.com/)
-
-ここにチェックしたいコードを貼りつけて，下部のチェックボックスからチェックしたいものにチェックを入れ， **Lint** ボタンを押すだけです．
-
-### Node.jsのnpmを使用して，JSHintをインストールする
-
-ここからのエディタにはコマンドラインで， `JSHint` が必要になります．
-必要なものは下記になります．
-
-- Homebrew(Mac OS Xのパッケージ管理システム)
-- node
-- npm
-
-`Homebrew`でインストールする場合は下記のようになります．
-
-```shell
-$ brew install node
-$ npm install -g jshint
-```
-
-また，WindowsやMac OS Xでもインストーラが[配布](http://nodejs.org/download/)されているので，  
-こちらからインストールする方法も取れますが，Macであれば前述の`Homebrew`のインストールがオススメです．
-
-詳しい導入方法は，[こちら](http://blog.craftgear.net/50832ff38cdc8fb415000001/title)を参考に導入してください．
-
-### WebStorm & PHPStorm
-
-標準で，使用できます． `Settings` を開き `JSHint` で検索して `enable` のチェックを入れるだけです．
-
-参考URL(英文)
-
-* [Web Coding Made Smarter](http://www.jetbrains.com/webstorm/features/index.html#JSLintJSHint)
-* [How to lint your JavaScript with JSLint in real time](http://blog.jetbrains.com/webide/2011/12/how-to-lint-your-javascript-with-jslint-in-real-time/)
-
-### Eclipse
-
-[jshint-eclipse](http://github.eclipsesource.com/jshint-eclipse/)プラグインを導入してください．
-
-### Sublime Text2
-
-[SublimeLinter](https://github.com/SublimeLinter/SublimeLinter)がおすすめです．
-
-
-### Vim
-
-[Syntastic](https://github.com/scrooloose/syntastic)がおすすめです．
-
-### Emacs
-
-Flymakeでの使用か[jshint-mode](https://github.com/daleharvey/jshint-mode)がおすすめです．
-
-### その他
-
-公式サイトに他のエディタで使用する場合の[リンク](http://www.jshint.com/platforms/)があります．
-
-### JSHintの設定について
-
-`JSHint` ではオプションの設定により，警告の有無を選ぶ事ができます． `npm` でインストールする場合は， `.jshintrc` ファイルをホームディレクトリや
-プロジェクトに作る事により，設定が反映されます．(プロジェクトの場合は `--config /path/to/.jshintrc` オプションを渡す必要あり)
-`.jshint` 自体はJSON形式で記述します．
-
-[こちら](http://www.jshint.com/docs/)が使用できるオプションになりますが，日本語での[説明](http://blog.craftgear.net/50832ff38cdc8fb415000001/title)も
-あります．
-
-`.jshintrc` 自体の書き方は[こちら](https://github.com/jshint/node-jshint/blob/master/.jshintrc)を参考にしてください．
-
-`.jshintrc` の[サンプル](http://ghe.amb.ca.local/hiraki-satoru/js-coding-guideline/blob/master/misc/.jshintrc)．一応，上記のガイドラインに合わせるようにしました．他はプロジェクト毎に変更していく・ファイル毎にオプションを書いていくなどしてください．
-
-#### JSHint 2.0での変更点
-
-**2013-05-17**
-
-先日，JSHintが2.0にバージョンアップしまして，そちらの[変更点](http://www.jshint.com/blog/2013-05-07/2-0-0/)が発表されています．
-主な変更は以下になります．
-
-* `es5`オプションがデフォルトになり，代わりに古いブラウザ用には`es3: true`を設定するようになった
-* *ES6(ES.next)* とMozilla Firefox限定の機能が部分的にサポートされている
-    * Destructuring assignment
-    * const
-    * let blocks and expressions
-    * Generators and iterators
-    * List comprehension
-    * Try/catch filters and multiple catch blocks
-    * Concise method declaration
-    * for ... of loops
-    * Fat arrows
-* CUIで使用する場合にディレクトリ内に`.jshintrc`ファイルがあるとそちらの設定を優先で読みに行くようになった
-* Node.jsのシステムでない場合にも[Browserify](http://browserify.org/)を使用するようになり，Rhinoでのパフォーマンスの問題が解決
-* SVGがグローバルオプションに登録できる
-* `smarttabs`オプションの挙動が変更になり，コメントの中のタブ・スペース混在は無視するようになる．
-* 推奨されないJSLintのオプションが無効に
-
-あとは，このバージョンからバージョンアップのスピードアップがされるそうです．
-
-## JavaScriptフレームワーク・ライブラリ
-
-使用するフレームワークについては，各プロジェクトでチームビルドにより違うので一概に「これが良い」というものはありません．  
-しかし，使用を推奨するフレームワーク・ライブラリは以下のようなものになるかと思います．
-
-### DOM操作
-
-* [jQuery](http://jquery.com/)
-    * 2.0で使用するのが良いです．
-* [zepto.js](http://zeptojs.com/)
-    * jQueryよりもイニシャルの転送量は少なくて済みます．が，セレクタの使い方を間違えるとDOM操作が遅くなるので注意．
-
-### Async/Control Flow
-
-* [Q](http://documentup.com/kriskowal/q/)
-* [When.js](https://github.com/cujojs/when)
-
-これらはこちらの[リポジトリ](http://ghe.amb.ca.local/am-game-coredev/async-controlFlow-compare)で検証していますが，
-jQuery代替として使用するなら上の2つがオススメです．
-
-### 注意点
-
-またテンプレートエンジンとして[Handlebars.js](http://handlebarsjs.com/)や[jsrender](http://borismoore.github.io/jsrender/demos/index.html)などが
-使用されています．(詳しい比較検討はしていません)
-
-プロジェクトによっては，もちろん他の選択もあると思いますが，どのライブラリもファイル容量やイニシャルのコストは絶対に増えるため  
-導入に際しては以下のような視点で選択していただきたいと思います．
-
-* そもそも本当に導入が必要なのか
-* 導入によるメリット・デメリット
-* ライブラリ(フレームワーク)自体のコードがきちんとしているか
-* 導入コストが低いか
-* ライブラリ(フレームワーク)が活発に更新されているか
-* ドキュメントなどが充実しているか
-
-など複数の視点で選択してください．もし迷った場合は，相談いただいても問題ありません．
 
 ## クライアントサイドJavaScript高速化の要点
 
-ここまで，色々と書いてきましたが，以上を踏まえてのクライアントの描画の要点をまとめてみます．
+今までは、JavaScript単体での注意点ですが、DOM操作を含めたクライアントの描画の要点をまとめてみます．
 
 ### HTMLのレンダリングをブロッキングしないようにscriptタグは下部に置く
 
@@ -852,17 +687,17 @@ $('#hoge').addClass('red'); // こっちが良い
 
 > 例えば，css()で色々要素の装飾をするよりは，id/classを振って，cssで設定した方がパフォーマンスが良いです．
 
-* HTMLにid/classを付ける場合はid→jsi，class→jscのプレフィックスを入れる．こうする事によりデザイン部分に必要なid/classか，JavaScriptでのターゲッティングに必要なだけのid/classなのかを区別できるので，後々のリファクタリングがやり易くなります．(現状はそこまでJavaScriptだけでしか使わないもの無いので無視で良いかも…)
+* HTMLにid/classを付ける場合は `js-` のプレフィックスを入れる．こうする事によりデザイン部分に必要なid/classか，JavaScriptでのターゲッティングに必要なだけのid/classなのかを区別できるので，後々のリファクタリングがやり易くなります
 
 ```html
-<div id="listWrapper" class="listDivider"></div> // NG
+<div id="list-wrapper" class="list-divider"></div> <!-- NG -->
 
-<div id="jsiListWrapper" class="jscListDivider"></div> // OK
+<div id="js-list-wrapper" class="js-list-divider"></div> <!-- OK -->
 ```
 
-## 1ソースアプリ特有の注意点
+## SPA特有の注意点
 
-`Backbone.js`などを使用してのアプリケーション開発では気をつけないと容易にメモリリークを起こしてしまいます．
+`Backbone.js` や、 `Angular.js` などを使用してのアプリケーション開発では気をつけないと容易にメモリリークを起こしてしまいます．
 
 特に画面が遷移した後に，以前のイベントを取り除かないなど
 
