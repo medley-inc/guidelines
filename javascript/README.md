@@ -2,90 +2,122 @@
 
 ## はじめに
 
-JavaScriptのコーディングをする上でのガイドラインになります。  
-**既にプロジェクトで、コーディング規約がある場合はそちらの方に従ってください。**  
-特にプロジェクトで規約が無い場合には、こちらのコーディングガイドラインを参考にしてください。
+株式会社メドレーのJavaScriptのコーディングをする上でのガイドラインになります。  
+
+基本的には[ECMAScript5.1](http://www.ecma-international.org/ecma-262/5.1/)に対するガイドラインです。
 
 主に参考にしているガイドラインは以下になります。
 
-1. [MDN](https://developer.mozilla.org/ja/)の[JavaScript style guide](https://developer.mozilla.org/ja/JavaScript_style_guide)
+1. [MDN](https://developer.mozilla.org/ja/)内[JavaScript style guide](https://developer.mozilla.org/ja/JavaScript_style_guide)
 2. [Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml)
 3. [jQuery Core Style Guidelines](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
 4. [Felix's Node.js Style Guide](http://nodeguide.com/style.html)
 5. [airbnb/javascript](https://github.com/airbnb/javascript)
+6. [cookpad/styleguide](https://github.com/cookpad/styleguide)
+7. [thoughtbot/guides](https://github.com/thoughtbot/guides)
 
 ## ホワイトスペース
+
+この項目は主に可読性の確保が目的です。
 
 * **[MUST]** インデントは **スペース2つ** でインデント。タブは使用しない。
 * **[SHOULD]** 1行は、 **120文字以内** にするようにする。横スクロールが出ないように。
     * 折り返す際は関連する行のインデントに合わせる。
-* **[AVOID]** 行末に **絶対に** スペースは入れないようにする。
+* **[DON'T]** 行末に **絶対に** スペースは入れないようにする。
 * **[MUST]** キーワードの後ろにはスペースを入れる。 例： `if (a === b)`
 * **[MUST]** 二項演算子はスペースで区切る。 例： `a + b`
 * **[MUST]** コンマ・セミコロンの**後ろ**にスペースを入れる。
 * **[SHOULD]** ブロックとブロックの間は1行以上空ける。
+* **[SHOULD]** 無名関数の `function` と `()` の間にスペースはいらない。
+* **[SHOULD]** 関数宣言の 関数名と `()` の間にはスペースはいらない。
 
 ```javascript
 var foo = function() {
     // 処理
-}
+} // 次の行を開けておく
 
 var bar = function() {
+     // 処理
+}
+
+var hoge = function() { // OK: 無名関数では()の前にスペースなし
+     // 処理
+}
+
+var hoge = function () { // NG: 無名関数では()の前にスペースあり
+     // 処理
+}
+
+function fuga() { // OK: 関数宣言の名前の後にスペースなし
+     // 処理
+}
+
+function fuga () { // NG: 関数宣言の名前の後にスペースあり
      // 処理
 }
 ```
 
 ## 記号
 
-* **[SHOULD]** インラインで記述する関数や、オブジェクトではコンマ・セミコロンの前以外では波括弧の前後にスペースを入れる。
-
-```javascript
-var hoge = function(value) { return { fuga: value }; }
-```
-
 * **[DON'T]**パラメータリストや配列の添え字などの角括弧や丸括弧の中のスペースは必須ではありません。
 
-- **[MUST]** ブロックは、波括弧は省略せずに記述してください。JavaScriptはインタプリタの種類によっては、解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起こり得ます.
+```javascript
+for (var i = 0; i > 10; i++) {
+  hoge[i] = fuga.innerHTML; // OK: []や()内にスペースが入ってない
+}
+
+for ( var i = 0; i > 10; i++ ) {
+  hoge[ i ] = fuga.innerHTML; // NG: []や()内にスペースが入ってる
+}
+```
+
+- **[MUST]** ブロックは、波括弧は省略せずに記述してください。JavaScriptはインタプリタの種類によっては、解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起こり得ます。
 
 ```javascript
 if (a === b) {
   return a + b;
-}  // ブロックの場合は波括弧の省略をせずに記述
+}  // OK: ブロックの場合は波括弧の省略をせずに記述
 
 if (a === b)
-  return a + b;  // NG
+  return a + b;  // NG: {}が省略されている
 ```
 
 * **[MUST]** JavaScriptではシングルクォートとダブルクォートで機能は違いませんが、JSON形式で記述する目的以外ではシングルクォートで記述してください。
+	* 理由は文字列にHTMLを入れる際にHTML属性をダブルクォートでそのまま記述できるからです。
 
 ```javascript
 var foo = 'foofoo';  // OK
 
 var bar = "barbar"; // NG
 
-var baz = '<a href="http://www.ameba.jp">Ameba</a>';  // HTMLを文字列として使用する場合にダブルクォートをエスケープしないで済む
+var baz = '<a href="http://www.ameba.jp">Ameba</a>';  // OK: HTMLを文字列として使用する場合にダブルクォートをエスケープしないで済む
+
+var baz = "<a href=\"http://www.ameba.jp\">Ameba</a>";  // NG: HTMLを文字列として使用する場合にダブルクォートをエスケープする必要がある
 ```
 
 ## 命名規則
 
-* **[MUST]** 命名には基本的には `functionNamesLikeThis` や `variableNamesLikeThis` のように命名してください。
-* **[MUST]** 定数や名前空間は `CONST_NAMES_LIKE_THIS` のように命名してください。
-* **[MUST]** コンストラクタ呼び出しをする関数は `ClassNamesLikeThis` のように命名してください。
+* **[MUST]** 関数には基本的には `functionNamesLikeThis` のようにローワーキャメルケースで命名してください。
+* **[MUST]** 定数や名前空間は `CONST_NAMES_LIKE_THIS` のように大文字スネークケースで命名してください。
+* **[MUST]** コンストラクタ呼び出しをする関数は `ClassNamesLikeThis` のようにアッパーキャメルケース命名してください。
 * **[MUST]** jQueryオブジェクトを入れる変数は、 `$foo = $('#bar');` のようにプレフィックスとして `$` を付けてください。
-* **[SHOULD]** 関数などは動詞 + 名詞で命名してください。
-* **[SHOULD]** 関数以外の変数などは名詞・形容詞 + 名詞で命名してください。
+* **[MUST]** 上記以外の命名は `variable_like_this` のように小文字スネークケースで命名してください
+* **[MSUT]** 関数などは動詞から始めてください
+* **[DON'T]** 関数以外の変数などは動詞から始めないでください。
 * **[MUST]** 命名は他の人が読んでも分かるように、具体的にしてください。
     * 名前が多少長くても問題ないです。一般性が無いものを略称にするのは可読性が悪くなります。やめましょう。
+* **[SHOULD]** `this` をローカルにバインドする場合は `var self = this;` にしてください。
+	* またjQueryオブジェクトであれば `var $self = $(this)` にしてください。
 
 ```javascript
 var HOGE = HOGE || {};  // 名前空間の定義はこのように命名
 
 HOGE = {
     checkForm: function() {  // 動詞 + 名詞
-        var $textInput = $('#contact > input[type=text]'),  // jQueryオブジェクトはプレフィックスに$を付ける
-            inputValue = $textInput.val(),  // jQueryを使用していても、返り値がjQueryオブジェクトでない場合は$を付けない
+        var $text_input = $('#contact > input[type=text]'),  // jQueryオブジェクトはプレフィックスに$を付ける
+            input_value = $text_input.val(),  // jQueryを使用していても、返り値がjQueryオブジェクトでない場合は$を付けない
             a = [], // 意味が分からない変数はNG
-            $submitButton = $('#contact > input[type=submit]');  // 関数ではないので、この場合はbuttonSubmitなどにする
+            $button_submit = $('#contact > input[type=submit]');  // 関数ではないので名詞から始める
     },
     ControlSubmit: function() {  // jQueryを使用してる場合は、あまり無いが、コンストラクタ呼び出しする場合にはこの命名
     }
@@ -142,7 +174,7 @@ if (a === b) {  // OK
     return;
 }
 
-if (a === b) { return; }  // NG。可読性確保の為です。どうせcompressされるし。
+if (a === b) { return; }  // NG: 可読性確保の為です。
 ```
 
 * **[MUST]** `if/else` や `try/catch` は同じ行に波括弧を書いてください。
@@ -156,7 +188,7 @@ if (a === b) {  // OK
     return false;
 }
 
-if (a === b)  // NG。C言語だとこの形式(バークレースタイルでしたっけ？)多いですが、JavaScriptでは避けた方が無難…
+if (a === b)  // NG
 {
     return;
 }
@@ -172,7 +204,7 @@ else
 
 ```javascript
 var a = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge' +
-    'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // OK
+ 'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // OK
 
 var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
     + 'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // NG
@@ -184,25 +216,26 @@ var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
 * **[MUST]** オブジェクトのKeyが複数の単語になる・予約語の場合はシングルクォートで囲ってください。
 
 ```javascript
-var a = ['foo', 'bar'];  // OK
-var b = [ // OK
+var a = { // OK
+  hoge: 'foo',
+  'is huga': 'bar' // OK: reserved wordsを''で囲む
+}
+a['is huga']; // 呼び出しのときはドットノテーションではダメです
+var b = ['foo', 'bar'];  // OK
+var c = [ // OK
   'foo', 'bar', 'baz',
   'foo2', 'bar2', 'baz2',
   'foo3', 'bar3', 'baz3',
   'foo4', 'bar4', 'baz4'
 ];
-var c = { // OK
-  hoge: 'foo',
-  'is huga': 'bar' 
-}
 
-var a = [ // NG
+var d= { //NG
+  "hoge": 'foo',
+  is huga: 'bar' // NG: エラーになります
+}
+var e = [ // NG
   'foo', 'bar'
 ];
-var b= { //NG
-  "hoge": 'foo',
-  is huga: 'bar'
-}
 ```
 
 ## コンストラクタ
@@ -254,7 +287,7 @@ hoge.hogera(); // hoge hogera
 
 * **[MUST]** JavaScriptでは、2種類の等価演算子が存在しています。( `==` と `===` )
 	* 一部の例外を除いて、比較には厳密等価演算子( `===` )を使用してください。等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます。
-	* 型変換が起きると、実行速度的にも遅くなります。ほぼ迷わず、厳密等価演算子で問題無いです。
+	* 型変換が起きると、実行速度的にも遅くなります。(現在ではこれが問題になることもないですが)ほぼ迷わず、厳密等価演算子で問題無いです。
 
 > 注意する点としては、既存のソースを等価演算子だからと言って、厳密等価演算子にしてしまうと動いていたコードが動かなくなる場合があります。
 
