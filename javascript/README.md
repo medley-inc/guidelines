@@ -31,27 +31,27 @@
 
 ```javascript
 var foo = function() {
-    // 処理
+  // 処理
 } // 次の行を開けておく
 
 var bar = function() {
-     // 処理
+  // 処理
 }
 
 var hoge = function() { // OK: 無名関数では()の前にスペースなし
-     // 処理
+  // 処理
 }
 
 var hoge = function () { // NG: 無名関数では()の前にスペースあり
-     // 処理
+  // 処理
 }
 
 function fuga() { // OK: 関数宣言の名前の後にスペースなし
-     // 処理
+  // 処理
 }
 
 function fuga () { // NG: 関数宣言の名前の後にスペースあり
-     // 処理
+  // 処理
 }
 ```
 
@@ -81,7 +81,7 @@ if (a === b)
 ```
 
 * **[MUST]** JavaScriptではシングルクォートとダブルクォートで機能は違いませんが、JSON形式で記述する目的以外ではシングルクォートで記述してください。
-	* 理由は文字列にHTMLを入れる際にHTML属性をダブルクォートでそのまま記述できるからです。
+    * 理由は文字列にHTMLを入れる際にHTML属性をダブルクォートでそのまま記述できるからです。
 
 ```javascript
 var foo = 'foofoo';  // OK
@@ -105,20 +105,20 @@ var baz = "<a href=\"http://www.ameba.jp\">Ameba</a>";  // NG: HTMLを文字列�
 * **[MUST]** 命名は他の人が読んでも分かるように、具体的にしてください。
     * 名前が多少長くても問題ないです。一般性が無いものを略称にするのは可読性が悪くなります。やめましょう。
 * **[SHOULD]** `this` をローカルにバインドする場合は `var self = this;` にしてください。
-	* またjQueryオブジェクトであれば `var $self = $(this)` にしてください。
+    * またjQueryオブジェクトであれば `var $self = $(this)` にしてください。
 
 ```javascript
 var HOGE = HOGE || {};  // 名前空間の定義はこのように命名
 
 HOGE = {
-    checkForm: function() {  // 動詞 + 名詞
-        var $text_input = $('#contact > input[type=text]'),  // jQueryオブジェクトはプレフィックスに$を付ける
-            input_value = $text_input.val(),  // jQueryを使用していても、返り値がjQueryオブジェクトでない場合は$を付けない
-            a = [], // 意味が分からない変数はNG
-            $button_submit = $('#contact > input[type=submit]');  // 関数ではないので名詞から始める
+  checkForm: function() {  // 動詞 + 名詞
+    var $text_input = $('#contact > input[type=text]'),  // jQueryオブジェクトはプレフィックスに$を付ける
+      input_value = $text_input.val(),  // jQueryを使用していても、返り値がjQueryオブジェクトでない場合は$を付けない
+      a = [], // 意味が分からない変数はNG
+      $button_submit = $('#contact > input[type=submit]');  // 関数ではないので名詞から始める
     },
-    ControlSubmit: function() {  // jQueryを使用してる場合は、あまり無いが、コンストラクタ呼び出しする場合にはこの命名
-    }
+  ControlSubmit: function() {  // jQueryを使用してる場合は、あまり無いが、コンストラクタ呼び出しする場合にはこの命名
+  }
 };
 ```
 
@@ -143,10 +143,10 @@ HOGE = {
  * @return
  */
 var hoge = function(x, y) {  // JSDocはもちろん大丈夫
-    this.x = x;
-    this.y = y;
+  this.x = x;
+  this.y = y;
 
-    return x + y;
+  return x + y;
 }
 
 // var fuga = function() {
@@ -155,7 +155,7 @@ var hoge = function(x, y) {  // JSDocはもちろん大丈夫
 
 /*
 var bar = function() {
-    var reg = /abc.*/g;  ここで正規表現をこのように使用すると、コメントの最終行と判断されてしまうので…
+  var reg = /abc.*/g;  ここで正規表現をこのように使用すると、コメントの最終行と判断されてしまうので…
 }
 */  // これ以降のコードが動作しなくなるのでNG
 
@@ -169,7 +169,7 @@ var bar = function() {
 
 ```javascript
 if (a === b) {  // OK
-    return;
+  return;
 }
 
 if (a === b) { return; }  // NG: 可読性確保の為です。
@@ -181,18 +181,18 @@ if (a === b) { return; }  // NG: 可読性確保の為です。
 
 ```javascript
 if (a === b) {  // OK
-    return;
+  return;
 } else {
-    return false;
+  return false;
 }
 
 if (a === b)  // NG
 {
-    return;
+  return;
 }
 else
 {
-    return false;
+  return false;
 }
 ```
 
@@ -205,7 +205,7 @@ var a = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge' +
  'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // OK
 
 var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
-    + 'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // NG
+  + 'fugafugafugafugafugafugafugafugafugafugafugafugafugafugafugafuga'; // NG
 ```
 
 ## オブジェクト・配列の記法
@@ -239,9 +239,9 @@ var e = [ // NG
 ## コンストラクタ
 
 * **[AVOID]** `prototype` に`{}`を入れて継承する場合には、 `new` を使用して呼び出す際に、コンストラクタが `Object` になってしまいます。
-	* `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です。
-	* `Object`が`prototype`になってしまう一番の弊害は、先にインスタンスを呼び出しておいて後から`prototype`を設定された場合にエラーが起きることです。
-	* 意図して、上記のような実装をすることはないと思いますが、予期せぬバグになりえます。
+    * `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です。
+    * `Object`が`prototype`になってしまう一番の弊害は、先にインスタンスを呼び出しておいて後から`prototype`を設定された場合にエラーが起きることです。
+    * 意図して、上記のような実装をすることはないと思いますが、予期せぬバグになりえます。
 
 ```javascript
 function Hoge() {
@@ -252,12 +252,12 @@ var hoge = new Hoge();
 
 // NG
 Hoge.prototype = {
-    fuga: function fuga() {
-        console.log('hoge fuga');
-    },
-    hogera: function hogera() {
-        console.log('hoge hogera');
-    }
+  fuga: function fuga() {
+      console.log('hoge fuga');
+  },
+  hogera: function hogera() {
+    console.log('hoge hogera');
+  }
 };
 
 // hogeのconstructorがオブジェクトなので、先にインスタンス呼び出ししてるとエラー
@@ -270,11 +270,11 @@ hoge.hogera();
 
 ```javascript
 Hoge.prototype.fuga = function fuga() {
-    console.log('hoge fuga');
+  console.log('hoge fuga');
 };
 
 Hoge.prototype.hogera = function hogera() {
-    console.log('hoge hogera');
+  console.log('hoge hogera');
 };
 
 console.log(hoge.constructor) // function Hoge() { console.log('new hoge'); } 
@@ -284,8 +284,8 @@ hoge.hogera(); // hoge hogera
 ## 等価演算子
 
 * **[MUST]** JavaScriptでは、2種類の等価演算子が存在しています。( `==` と `===` )
-	* 一部の例外を除いて、比較には厳密等価演算子( `===` )を使用してください。等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます。
-	* 型変換が起きると、実行速度的にも遅くなります。(現在ではこれが問題になることもないですが)ほぼ迷わず、厳密等価演算子で問題無いです。
+    * 一部の例外を除いて、比較には厳密等価演算子( `===` )を使用してください。等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます。
+    * 型変換が起きると、実行速度的にも遅くなります。(現在ではこれが問題になることもないですが)ほぼ迷わず、厳密等価演算子で問題無いです。
 
 > 注意する点としては、既存のソースを等価演算子だからと言って、厳密等価演算子にしてしまうと動いていたコードが動かなくなる場合があります。
 
@@ -296,24 +296,24 @@ hoge.hogera(); // hoge hogera
 ```javascript
 var a = 0;  // 変数aはNumber
 if (a === '') {
-    console.log('OK'); // このlogは表示されないので、OK
+  console.log('OK'); // このlogは表示されないので、OK
 }
 
 var b = 0;  // 変数bはNumber
 if (b == '') { // ここで暗黙の型変換が起こり、trueで評価される
-    console.log('NG'); // このlogは表示されてしまい、NG
+  console.log('NG'); // このlogは表示されてしまい、NG
 }
 
 var c = undefined;  // 変数cはundefined
 if (c == null) {  // 右辺をnullにして、等価演算子で評価すると…。
-    console.log('OK');  // このlogが表示されて、OK
+  console.log('OK');  // このlogが表示されて、OK
 }
 ```
 
 ## 三項演算子について
 
 * **[MUST]** 三項演算子を使用する場合は、可読性を良くする為に条件文に丸カッコを付けて `(condition) ? a : b;` のように記述してください。
-	* `if` 文を使用した方が可読性は間違いなく高くなるので、三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに使用してください。乱用は可読性が悪くなるので、禁物です。
+    * `if` 文を使用した方が可読性は間違いなく高くなるので、三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに使用してください。乱用は可読性が悪くなるので、禁物です。
 
 ```javascript
 var foo = (a === 'bar') ? return true : return false;  // OK:  条件部分は丸括弧で括る。
@@ -331,36 +331,36 @@ var foo = a === 'bar' ? return true : return false;  // NG: 丸括弧が無い�
 
 ```javascript
 var testFunc = function() { // OK
-    var foo = 'foofoo',  // 変数はスコープの先頭で全て定義しておく。また、 `var` は1つのみ宣言する。各変数で `var` を宣言しない。
-        bar = true,
-        baz = {
-            bazbaz: 123456
-        },
-        hoge, fuga;  // DOMを取得するなどで、この時点では代入できない場合は、最後に変数の宣言のみしておく
+  var foo = 'foofoo',  // 変数はスコープの先頭で全て定義しておく。また、 `var` は1つのみ宣言する。各変数で `var` を宣言しない。
+    bar = true,
+    baz = {
+      bazbaz: 123456
+    },
+    hoge, fuga;  // DOMを取得するなどで、この時点では代入できない場合は、最後に変数の宣言のみしておく
 
-    if (foo === 'foofoo') {
-        hoge = foo.length;
-        // 処理
-    }
+  if (foo === 'foofoo') {
+    hoge = foo.length;
+    // 処理
+  }
 }
 
 var testFunc = function() { // NG
-    var foo = 'foofoo';
-    var baz = {
-        bazbaz: 123456
-    };  //各行に `var` を宣言しない。
-    if (foo === 'foofoo') {  // 空行を入れていない。
-        var bar = true;
-        // 処理
-        var hoge = foo.length;  // 変数定義の場所は先頭にまとめる。
-    }
+  var foo = 'foofoo';
+  var baz = {
+    bazbaz: 123456
+  };  //各行に `var` を宣言しない。
+  if (foo === 'foofoo') {  // 空行を入れていない。
+    var bar = true;
+    // 処理
+    var hoge = foo.length;  // 変数定義の場所は先頭にまとめる。
+  }
 }
 ```
 
 ## Strict Mode セーフなコードにする
 
 * **[MUST]** ECMAScript 5.1のStrict Modeを仮に指定したとしても、動くコードを書いてください
-	* 具体的には **行末のセミコロンの省略** 、 **`arguments.callee` の使用** などです。
+    * 具体的には **行末のセミコロンの省略** 、 **`arguments.callee` の使用** などです。
 * **[DON'T]** 下記にあるように `eval()` 、 `with()`や`new Function()` の使用も禁止です。
 * **[DON'T]** `arugments.callee` 、 `eval()` 、 `with()`や`new Function()` は特にパフォーマンス面で深刻な問題があります。
 * 他にもあるのですが、[JSHint](http://www.jshint.com/)のオプションで `Assume > EcmaScript 5` にチェックを入れても、問題無いようにしてください。
@@ -370,7 +370,7 @@ var testFunc = function() { // NG
 var a = 200 * 50  // 行末のセミコロンが抜けているので、NG
 
 function hoge() {
-    return arugments.callee; //arguments.calleeは使用禁止
+  return arugments.callee; //arguments.calleeは使用禁止
 }
 ```
 
@@ -380,14 +380,14 @@ function hoge() {
 
 ```javascript
 var hoge = function(string) {
-    return test.prop[string];  // 普通に関数を使うのでOK
+  return test.prop[string];  // 普通に関数を使うのでOK
 }
 
 var hoge = function(string) {
-    var reference;
+  var reference;
 
-    eval('reference = test.prop.' + string);  // eval()の使用はNG
-    return reference;
+  eval('reference = test.prop.' + string);  // eval()の使用はNG
+  return reference;
 }
 ```
 
@@ -397,11 +397,11 @@ var hoge = function(string) {
 
 ```javascript
 var parseJson = function(json) {
-    var json = JSON.parse(json);  // OK
+  var json = JSON.parse(json);  // OK
 }
 
 var parseJson = function(json) {
-    var json = eval(json);  // NG
+  var json = eval(json);  // NG
 }
 ```
 
@@ -411,11 +411,11 @@ var parseJson = function(json) {
 
 ```javascript
 setTimeout(function() {  //setTimeout()には必ず関数を引数で渡すようにする。OK
-    var target += 3;
+  var target += 3;
 
-    if (target.length > 0) {
-        return result;
-    }
+  if (target.length > 0) {
+    return result;
+  }
 }, 500);
 
 setTimeout('var target += 3; returnResult(); if (target.length > 0) { return result;}', 500);  // 文字列で関数を渡すのはNG
@@ -428,20 +428,20 @@ setTimeout('var target += 3; returnResult(); if (target.length > 0) { return res
 ```javascript
 var targetArray = ['1st', '2nd', '3rd'];
 for (var i = 0, len = targetArray.length; i < len; i++) { // 大体のコードでは、try-catch-finaly文を使用しないでも同じ動きのコードが書ける
-    if (test[targetArray[i]]) {
-        test[targetArray[i]].prop = val;
-    }
+  if (test[targetArray[i]]) {
+    test[targetArray[i]].prop = val;
+  }
 }
 
 var targetArray = ['1st', '2nd', '3rd'];
 for (var i = 0, len = targetArray.length; i < len; i++) {
-    try {
-        test[targetArray[i]].prop = val;
-    } catch(e) {  // catch節の中で、ループするなどは速度低下の原因
-        for (var j = 0, len = hoge.length; j < len; j++) {
-            // 複雑な処理
-        }
+  try {
+    test[targetArray[i]].prop = val;
+  } catch(e) {  // catch節の中で、ループするなどは速度低下の原因
+    for (var j = 0, len = hoge.length; j < len; j++) {
+      // 複雑な処理
     }
+  }
 }
 ```
 
@@ -449,18 +449,18 @@ for (var i = 0, len = targetArray.length; i < len; i++) {
 
 ```javascript
 var foo = function() {
-    var i, hoge = ''; // 変数がローカルなので、OK
-    for (i = 0; i < 20 i++) {
-        hoge += i;
-    }
+  var i, hoge = ''; // 変数がローカルなので、OK
+  for (i = 0; i < 20 i++) {
+    hoge += i;
+  }
 }
 foo();
 
 var i, hoge = ''; // 変数がグローバルなので、NG
 var foo = function() {
-    for (i = 0; i < 20 i++) {
-        hoge += i;
-    }
+  for (i = 0; i < 20 i++) {
+    hoge += i;
+  }
 }
 foo();
 ```
@@ -470,81 +470,81 @@ foo();
 ```javascript
 // 名前空間(この場合はnamespace)オブジェクトの下にさらにオブジェクトを作る
 var window.namespace.hoge = {  // ok
-    message: 'hello'
+  message: 'hello'
 };
 
 // グローバル変数として、オブジェクトを作ると他の同名の変数で上書きされたりする
 var hoge = {  // ng
-        message: 'hello'
+  message: 'hello'
 };
 ```
 
 * **[DON'T]** 暗黙の型変換をしないようにしてください。具体的には等価演算子を使用するようにしてください。
-	* 暗黙の型変換するとパフォーマンス的にも遅いです。
-		  * 速度の違いはこちらの[JSPerf](http://jsperf.com/super-duper-equality-checks)を参考にしてください
+    * 暗黙の型変換するとパフォーマンス的にも遅いです。
+          * 速度の違いはこちらの[JSPerf](http://jsperf.com/super-duper-equality-checks)を参考にしてください
 
 ```javascript
 var a = 0;  // 変数aはNumber
 if (a === '') {
-    console.log('OK'); // このlogは表示されないので、OK
+  console.log('OK'); // このlogは表示されないので、OK
 }
 
 var b = 0;  // 変数bはNumber
 if (b == '') { // ここで暗黙の型変換が起こり、trueで評価される
-    console.log('NG'); // このlogは表示されてしまい、NG
+  console.log('NG'); // このlogは表示されてしまい、NG
 }
 ```
 
 * **[AVOID]** `for-in` 文をむやみに使用しないでください。大概が `for` 文で事足ります。オブジェクトの走査などで使用する場合は必ず `Object.hasOwnProperty()` を併用してください。
-	- `for-in` 文をオブジェクトの走査に使用すると、大元のObjectまで走査しにいきます。なので、 `Object.hasOwnProperty` 無しだと無駄なコストがかかってしまいます。
-	- `for-in` + `Object.hasOwnProperty` の代わりに、 `Object.keys(obj)` を使用する事もできます。使えるならこちらの方がパフォーマンスは良いはず。(関数呼び出しのコストが無くなる)
-* **[DON'T]** `for-in` 文を配列に対して使う事は特に厳禁です。パフォーマンスがむちゃくちゃ落ちます。
+    * `for-in` 文をオブジェクトの走査に使用すると、大元のObjectまで走査しにいきます。なので、 `Object.hasOwnProperty` 無しだと無駄なコストがかかってしまいます。
+    * `for-in` + `Object.hasOwnProperty` の代わりに、 `Object.keys(obj)` を使用する事もできます。使えるならこちらの方がパフォーマンスは良いはず。(関数呼び出しのコストが無くなる)
+* **[DON'T]** `for-in` 文を配列に対して使う事は特に厳禁です。パフォーマンスが悪いです。
 
 ```javascript
 var array = ['foo', 'bar', 'baz'],
-    sum = 0;
+  sum = 0;
 for (var i = 0, len = array.length; i < len; i++) { // 配列の場合はfor文でループできる。
-    sum += array[i];
+  sum += array[i];
 }
 
 var array = ['foo', 'bar', 'baz'],
-    sum = 0;
+  sum = 0;
 for (i in array) {  // この場合にfor-in文を使用すると非常に遅くなる。
-    sum += array[i];
+  sum += array[i];
 }
 
 var object = {
-foo: 'hoge', 
-     bar: 'huga',
-     baz: 'hogehoge'
+  foo: 'hoge',
+  bar: 'huga',
+  baz: 'hogehoge'
 },
-    result = [];
+  result = [];
 
 for (name in object) { // オブジェクトの走査の場合はfor-inを使用してもOK
-    if (object.hasOwnProperty(name)) { // その場合Object.hasOwnPropertyで判定して、必要以上にチェーンを遡らないようにする。
-        result.push(object[name]);
-    }
+  if (object.hasOwnProperty(name)) { // その場合Object.hasOwnPropertyで判定して、必要以上にチェーンを遡らないようにする。
+    result.push(object[name]);
+  }
 }
 
 // ES5の `Object.keys(obj)` を使用する場合はこんな感じかな
 var object = {
-foo: 'hoge',
-     bar: 'huga',
-     baz: 'hogehoge'
+  foo: 'hoge',
+  bar: 'huga',
+  baz: 'hogehoge'
 },
-    result = [],
-    keys = Object.keys(object), key;
+  result = [],
+  keys = Object.keys(object), key;
 
 // そこまで大量なプロパティが無ければ…
 keys.forEach(function(name) {
-    result.push(object[name]);
+  result.push(object[name]);
 });
 
 // 速さ命の場合はfor文で
 for (var i = 0, len = keys.length; i < len; i++) {
-    key = keys[i];
+  key = keys[i];
 
-    result.push(object[key]);
+  result.push(object[key]);
 }
 ```
 
@@ -552,17 +552,17 @@ for (var i = 0, len = keys.length; i < len; i++) {
 
 ```javascript
 var array = ['foo', 'bar', 'baz'],
-    html = '';
+  html = '';
 
 for(var i = 0, len = array.length; i < len; i++) {  // array.lengthを変数lenに格納する事により、ループ回数に関わらず1回参照するだけ。
-    html += array[i];
+  html += array[i];
 }
 
 var array = ['foo', 'bar', 'baz'],
-    html = '';
+  html = '';
 
 for(var i = 0; i < array.length; i++) {  // array.lengthを変数に入れないと、ループ毎にarray.lengthを参照してしまう。
-    html += array[i];
+  html += array[i];
 }
 ```
 
@@ -570,14 +570,14 @@ for(var i = 0; i < array.length; i++) {  // array.lengthを変数に入れない
 
 ```javascript
 var object = {},
-    array = [],
-    regex = /hoge.*/g,
-    func = function() {},
-    string = '';  // 特別理由が無ければ、リテラルで生成する。
+  array = [],
+  regex = /hoge.*/g,
+  func = function() {},
+  string = '';  // 特別理由が無ければ、リテラルで生成する。
 
 var object = new Object(),
-    array = new Array(),
-    regex = new RegExp('hoge.*', g),
-    func = new Function(),
-    string = new String();  // コンストラクタ呼び出しは、基本しない
+  array = new Array(),
+  regex = new RegExp('hoge.*', g),
+  func = new Function(),
+  string = new String();  // コンストラクタ呼び出しは、基本しない
 ```
