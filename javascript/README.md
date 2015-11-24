@@ -69,7 +69,7 @@ for ( var i = 0; i > 10; i++ ) {
 }
 ```
 
-- **[MUST]** ブロックは、波括弧は省略せずに記述してください。JavaScriptはインタプリタの種類によっては、解釈する際に勝手にセミコロンを自動挿入するので変なエラーが起こり得ます。
+- **[MUST]** ブロックは、波括弧は省略せずに記述してください。
 
 ```javascript
 if (a === b) {
@@ -81,7 +81,6 @@ if (a === b)
 ```
 
 * **[MUST]** JavaScriptではシングルクォートとダブルクォートで機能は違いませんが、JSON形式で記述する目的以外ではシングルクォートで記述してください。
-    * 理由は文字列にHTMLを入れる際にHTML属性をダブルクォートでそのまま記述できるからです。
 
 ```javascript
 var foo = 'foofoo';  // OK
@@ -124,9 +123,8 @@ HOGE = {
 
 ## コメント
 
-* **[MUST]** コメントはソースコードの先頭以外では、 `//` を使用してください。コード中で `/* */` を使用するとバグが混入する可能性があります。
+* **[MUST]** コメントはソースコードの先頭以外では、 `//` を使用してください。
 * ただし、JSDocを書くのはもちろん上記の限りではありません。
-* [JSDoc](http://usejsdoc.org/)の使用については、ここでは触れません。
 
 ```javascript
 /*
@@ -161,7 +159,7 @@ var bar = function() {
 
 ```
 
-* **[SHOULD]** 不要なコメントは残さないでください。特に仕様や動作が変更されているのに、コメントが変更されていないと保守がしにくいです。
+* **[SHOULD]** 不要なコメントは残さないでください。
 
 ## ブロック
 
@@ -198,7 +196,7 @@ else
 
 ## 文字列の連結
 
-**[MUST]** 長い文字列の連結をする際は `+` を行末に置いてください。セミコロン自動挿入などにより無用なエラーや、圧縮時のトラブルを防ぐためです。
+**[MUST]** 長い文字列の連結をする際は `+` を行末に置いてください。
 
 ```javascript
 var a = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge' +
@@ -210,7 +208,7 @@ var b = 'hogehogehogehogehogehogehogehogehogehogehogehogehogehogehogehoge'
 
 ## オブジェクト・配列の記法
 
-* **[SHOULD]** オブジェクトは複数行にして記述してください。配列の場合は基本1列で記述してください。長くなるようなら、キリ良く複数行対応で。
+* **[SHOULD]** オブジェクトは複数行にして記述してください。配列の場合は基本1列で記述してください。長くなるようなら、複数行対応で。
 * **[MUST]** オブジェクトのKeyが複数の単語になる・予約語の場合はシングルクォートで囲ってください。
 
 ```javascript
@@ -240,8 +238,6 @@ var e = [ // NG
 
 * **[AVOID]** `prototype` に`{}`を入れて継承する場合には、 `new` を使用して呼び出す際に、コンストラクタが `Object` になってしまいます。
     * `prototype` で自動で設定されるコンストラクタは上書き可能な為に `Object` が代入されてしまう為です。
-    * `Object`が`prototype`になってしまう一番の弊害は、先にインスタンスを呼び出しておいて後から`prototype`を設定された場合にエラーが起きることです。
-    * 意図して、上記のような実装をすることはないと思いますが、予期せぬバグになりえます。
 
 ```javascript
 function Hoge() {
@@ -283,13 +279,11 @@ hoge.hogera(); // hoge hogera
 
 ## 等価演算子
 
-* **[MUST]** JavaScriptでは、2種類の等価演算子が存在しています。( `==` と `===` )
-    * 一部の例外を除いて、比較には厳密等価演算子( `===` )を使用してください。等価演算子( `==` )を使用すると暗黙の型変換が起こりバグの原因になってしまいます。
-    * 型変換が起きると、実行速度的にも遅くなります。(現在ではこれが問題になることもないですが)ほぼ迷わず、厳密等価演算子で問題無いです。
+* **[MUST]** JavaScriptでは、2種類の等価演算子が存在しています。( `==` と `===` )理由がない限り厳密等価演算子( `===` )を使用してください
 
 > 注意する点としては、既存のソースを等価演算子だからと言って、厳密等価演算子にしてしまうと動いていたコードが動かなくなる場合があります。
 
-* **[SHOULD]** 上記の一部の例外とは `null` と `undefined` を判定する場合です。この時に `null` と `undefined` の両方の値を評価したい場合に、等価演算子( `==` )を使用すると、本来は `null` と `undefined` は別のオブジェクトですが両方とも評価します。
+* **[SHOULD]** 例外で `null` と `undefined` を判定する場合は等価演算子( `==` )を使用してもよいです。
 
 > 詳しくは[Qiita](http://qiita.com/items/7d6763ba2594b8f36163)に書きました。
 
@@ -313,7 +307,6 @@ if (c == null) {  // 右辺をnullにして、等価演算子で評価すると�
 ## 三項演算子について
 
 * **[MUST]** 三項演算子を使用する場合は、可読性を良くする為に条件文に丸カッコを付けて `(condition) ? a : b;` のように記述してください。
-    * `if` 文を使用した方が可読性は間違いなく高くなるので、三項演算子は主に変数への代入する際に条件によって値を分岐させる場合などに使用してください。乱用は可読性が悪くなるので、禁物です。
 
 ```javascript
 var foo = (a === 'bar') ? return true : return false;  // OK:  条件部分は丸括弧で括る。
@@ -327,7 +320,7 @@ var foo = a === 'bar' ? return true : return false;  // NG: 丸括弧が無い�
 * **[SHOULD]** `var` の下には必ず1行の空行を入れてください。
 * **[SHOULD]** 宣言時に未定義の変数は最後にまとめてください。
 * **[SHOULD]** 変数定義の場所がバラバラだと、デバッグが困難になったり、潜在的なバグの原因になります。
-* **[AVOID]** 変数は必ず定義してから、呼び出してください。意図しない[**巻き上げ**](http://bonsaiden.github.com/JavaScript-Garden/ja/#function.scopes)でバグになる可能性があります。
+* **[AVOID]** 変数は必ず定義してから、呼び出してください。意図しない[**巻き上げ**](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/var#var.E3.81.AE.E5.B7.BB.E3.81.8D.E4.B8.8A.E3.81.92.EF.BC.88hoisting.EF.BC.89)でバグになる可能性があります。
 
 ```javascript
 var testFunc = function() { // OK
@@ -363,8 +356,6 @@ var testFunc = function() { // NG
     * 具体的には **行末のセミコロンの省略** 、 **`arguments.callee` の使用** などです。
 * **[DON'T]** 下記にあるように `eval()` 、 `with()`や`new Function()` の使用も禁止です。
 * **[DON'T]** `arugments.callee` 、 `eval()` 、 `with()`や`new Function()` は特にパフォーマンス面で深刻な問題があります。
-* 他にもあるのですが、[JSHint](http://www.jshint.com/)のオプションで `Assume > EcmaScript 5` にチェックを入れても、問題無いようにしてください。
-    * JSHintのバージョンが2以降の場合はデフォルトで`EcmaScript 5`のオプションが`true`になっています。
 
 ```javascript
 var a = 200 * 50  // 行末のセミコロンが抜けているので、NG
@@ -376,7 +367,7 @@ function hoge() {
 
 ## JavaScript特有の注意点
 
-* **[DON'T]** 特別な理由が無い限り、 `eval()` 、 `with()`や`new Function()` の使用は禁止です。普通のWebアプリを作るのに際して、この3つを使わなければならない状況は無いはずです。
+* **[DON'T]** 特別な理由が無い限り、 `eval()` 、 `with()`や`new Function()` の使用は禁止です。
 
 ```javascript
 var hoge = function(string) {
@@ -393,8 +384,6 @@ var hoge = function(string) {
 
 * **[DON'T]** JSONファイルのパースは上述のように `eval()` ではなく、 `JSON.parse()` を使用してください。jQueryは `jQuery.ajax()` など使用すれば問題ありません。
 
-> 特に[最近のブラウザ](http://caniuse.com/#search=JSON)では、 `JSON` がほぼ搭載されてます。どうしてもIE対応などで必要な場合は*json2.js*などを使用するのをオススメ
-
 ```javascript
 var parseJson = function(json) {
   var json = JSON.parse(json);  // OK
@@ -406,8 +395,6 @@ var parseJson = function(json) {
 ```
 
 * **[DON'T]** `setInterval()` や `setTimeout()` 、の引数に文字列を渡さないようにしてください。引数には必ず関数か、匿名関数を渡すようにしてください。
-
-> 文字列で引数を渡すと、内部で `eval()` を使用して評価されるので大変に遅くなります。
 
 ```javascript
 setTimeout(function() {  //setTimeout()には必ず関数を引数で渡すようにする。OK
@@ -422,8 +409,6 @@ setTimeout('var target += 3; returnResult(); if (target.length > 0) { return res
 ```
 
 * **[AVOID]** `try-catch-finally` を速度が必要な部分で使用しないでください。特に `catch` 節で複雑な処理をしないでください。
-
-> これも `catch` 部分のコードが内部で `eval()` を呼んでしまうからです。
 
 ```javascript
 var targetArray = ['1st', '2nd', '3rd'];
@@ -480,8 +465,6 @@ var hoge = {  // ng
 ```
 
 * **[DON'T]** 暗黙の型変換をしないようにしてください。具体的には等価演算子を使用するようにしてください。
-    * 暗黙の型変換するとパフォーマンス的にも遅いです。
-          * 速度の違いはこちらの[JSPerf](http://jsperf.com/super-duper-equality-checks)を参考にしてください
 
 ```javascript
 var a = 0;  // 変数aはNumber
@@ -497,7 +480,7 @@ if (b == '') { // ここで暗黙の型変換が起こり、trueで評価され�
 
 * **[AVOID]** `for-in` 文をむやみに使用しないでください。大概が `for` 文で事足ります。オブジェクトの走査などで使用する場合は必ず `Object.hasOwnProperty()` を併用してください。
     * `for-in` 文をオブジェクトの走査に使用すると、大元のObjectまで走査しにいきます。なので、 `Object.hasOwnProperty` 無しだと無駄なコストがかかってしまいます。
-    * `for-in` + `Object.hasOwnProperty` の代わりに、 `Object.keys(obj)` を使用する事もできます。使えるならこちらの方がパフォーマンスは良いはず。(関数呼び出しのコストが無くなる)
+    * `for-in` + `Object.hasOwnProperty` の代わりに、 可能ならば、`Object.keys(obj)` を使用するほうがよいです。
 * **[DON'T]** `for-in` 文を配列に対して使う事は特に厳禁です。パフォーマンスが悪いです。
 
 ```javascript
