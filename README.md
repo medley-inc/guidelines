@@ -3,6 +3,7 @@
 ## Style Guides
 
 - [JavaScript](https://github.com/medley-inc/guidelines/tree/master/javascript)
+- [CofeeScript](https://github.com/medley-inc/guidelines/tree/master/coffeescript)
 
 ## Note
 
